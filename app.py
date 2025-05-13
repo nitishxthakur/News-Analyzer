@@ -8,7 +8,7 @@ Original file is located at
 """
 
 # Install only once
-!pip install transformers datasets scikit-learn
+pip install transformers datasets scikit-learn
 
 # Import libraries
 import pandas as pd
@@ -20,7 +20,7 @@ from sklearn.preprocessing import LabelEncoder
 from transformers import RobertaTokenizer, RobertaForSequenceClassification, Trainer, TrainingArguments
 
 # Load data
-df = pd.read_excel('/content/cleaned_babe_dataset_updated.xlsx', sheet_name='Sheet1')
+df = pd.read_excel('cleaned_babe_dataset_updated.xlsx', sheet_name='Sheet1')
 
 # Encode labels
 bias_mapping = {'Non biased': 0, 'Biased': 1}
