@@ -2,3 +2,4 @@ transformers==4.51.3
 torch==2.6.0
 streamlit==1.45.1
 scikit-learn
+openpyxl==3.1.2
