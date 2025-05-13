@@ -265,7 +265,7 @@ trainer = Trainer(
 # Train
 trainer.train()
 
-!pip install streamlit
+pip install streamlit
 # Import required libraries
 import streamlit as st
 import torch
