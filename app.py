@@ -11,10 +11,10 @@ def download_model(file_id, output_path):
 
 # Paths and file IDs for models
 model_paths = {
-    "bias_detection": ("1-02Xk7Rt6yBrzDg2aEdXfZgzD2pSN8xC", "bias_detection.pkl"),
-    "biased_word_detection": ("1FF691PcXaoOhBSxyjMOdybnbPxwEFxHD", "biased_word_detection.pkl"),
-    "topic_detection": ("19vx4C4ZtqSG0GW-WnyfBG43QTQfMTE8l", "topic_detection.pkl"),
-    "leaning_detection": ("1V7FUl4Y6DKOyHeSquVCuI0eqMuNGOsmJ", "leaning_detection.pkl"),
+    "bias_detection": ("1-02Xk7Rt6yBrzDg2aEdXfZgzD2pSN8xC", "bias_model.pkl"),
+    "biased_word_detection": ("1FF691PcXaoOhBSxyjMOdybnbPxwEFxHD", "biased_word_model.pkl"),
+    "topic_detection": ("19vx4C4ZtqSG0GW-WnyfBG43QTQfMTE8l", "topic_model.pkl"),
+    "leaning_detection": ("1V7FUl4Y6DKOyHeSquVCuI0eqMuNGOsmJ", "leaning_model.pkl"),
 }
 
 # Download and load models
