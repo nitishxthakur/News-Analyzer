@@ -2,6 +2,23 @@ import os
 import pickle
 import gdown
 import streamlit as st
+import sys  # Import sys for environment check
+
+# Print Python version for debugging
+print(f"Python version: {sys.version}")
+
+# Try setting torch.classes.__path__ at the very beginning
+try:
+    import torch
+    if hasattr(torch.classes, '__path__'):
+        torch.classes.__path__ = [os.path.join(torch.__path__[0], 'classes')]
+    else:
+        torch.classes.__path__ = []
+    print("Successfully attempted to set torch.classes.__path__")
+except ImportError:
+    print("PyTorch not found, skipping torch.classes.__path__ modification.")
+except Exception as e:
+    print(f"An error occurred while trying to set torch.classes.__path__: {e}")
 
 # Define a function to download models from Google Drive
 def download_model(file_id, output_path):
