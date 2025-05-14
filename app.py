@@ -7,7 +7,7 @@ import streamlit as st
 def download_model(file_id, output_path):
     if not os.path.exists(output_path):
         url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output_path, quiet=False)
+        gdown.download(url, output_path, quiet=True)  # Set quiet=True for cleaner output
 
 # Paths and file IDs for models
 model_paths = {
@@ -21,8 +21,12 @@ model_paths = {
 models = {}
 for model_name, (file_id, file_name) in model_paths.items():
     download_model(file_id, file_name)
-    with open(file_name, "rb") as f:
-        models[model_name] = pickle.load(f)
+    try:
+        with open(file_name, "rb") as f:
+            models[model_name] = pickle.load(f)
+    except Exception as e:
+        st.error(f"Error loading model '{file_name}': {e}")
+        st.stop()
 
 # Define prediction functions
 def predict_bias(text):
@@ -31,7 +35,15 @@ def predict_bias(text):
 
 def detect_biased_words(text):
     model = models["biased_word_detection"]
-    return model.predict([text])[0]  # Assumes the model returns a list of biased words
+    # Assuming the model returns a list of biased words.
+    # If it returns a single string, you might need to adjust this.
+    prediction = model.predict([text])[0]
+    if isinstance(prediction, str):
+        return [word.strip() for word in prediction.split(',')] # Split string into a list
+    elif isinstance(prediction, list):
+        return prediction
+    else:
+        return [str(prediction)] # Handle other potential outputs
 
 def detect_topic(text):
     model = models["topic_detection"]
@@ -43,13 +55,6 @@ def detect_leaning(text):
 
 # Streamlit interface
 st.title("Media Bias Detection Tool")
-import asyncio
-
-try:
-    asyncio.get_running_loop()
-except RuntimeError:
-    asyncio.set_event_loop(asyncio.new_event_loop())
-
 
 # User input
 text_input = st.text_area("Enter text for analysis:")
