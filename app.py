@@ -43,6 +43,13 @@ def detect_leaning(text):
 
 # Streamlit interface
 st.title("Media Bias Detection Tool")
+import asyncio
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 
 # User input
 text_input = st.text_area("Enter text for analysis:")
